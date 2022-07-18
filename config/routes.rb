@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/register', to: 'login#create'
   get '/', to: 'landing#index'
   get '/users/register', to: 'users#new'
   get '/users/:id/discover', to: 'discover#index'
