@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Discover Index Page' do
   describe "button link paths" do
     before :each do
-      @user = User.create!(name: 'Drewb', email: 'Drew@testemail.com')
+      @user = User.create!(name: 'Drewb', email: 'Drew@testemail.com', password: "test", password_confirmation: "test")
     end
 
     it "has a button to discover top rated movies", :vcr do
