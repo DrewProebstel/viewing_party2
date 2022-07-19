@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   def login_user
     @user = User.find_by(email: params[:email])&.authenticate(params[:password])
     if @user.id != nil
+      session[:user_id] = @user.id
       redirect_to "/users/#{@user.id}"
     else
       flash[:error] = "invalid credential"
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = 'Account Successfully Created'
       redirect_to "/users/#{@user.id}"
     else
