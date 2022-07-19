@@ -33,6 +33,6 @@ RSpec.describe "Registration Page" do
     fill_in "Password confirmation", with: 'test123'
     click_button "Register"
 
-    expect(page).to have_content('Invalid Entry')
+    expect(page).to have_content('Email has already been taken')
   end
 end

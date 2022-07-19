@@ -9,17 +9,33 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def login_form
+
+  end
+
+  def login_user
+    @user = User.find_by(email: params[:email])&.authenticate(params[:password])
+    if @user.id != nil
+      redirect_to "/users/#{@user.id}"
+    else
+      flash[:error] = "invalid credential"
+      render 'new'
+    end
+  end
+
   def create
     @user = User.create(user_params)
     if @user.save
       flash[:success] = 'Account Successfully Created'
       redirect_to "/users/#{@user.id}"
     else
-      flash[:error] = 'Invalid Entry'
-      render 'new'
+      @user.errors.full_messages.each do |error|
+      flash[:error] = error
     end
+    render 'new'
   end
 
+end
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
