@@ -7,6 +7,6 @@ RSpec.describe "Login Page" do
     fill_in "Email", with: 'Drew@testemail.com'
     fill_in "Password", with: 'test'
     click_button "Log In"
-    expect(current_path).to eq("/users/#{user.id}")
+    expect(current_path).to eq("/users")
   end
 end

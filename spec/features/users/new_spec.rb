@@ -21,7 +21,7 @@ RSpec.describe "Registration Page" do
     click_button "Register"
 
     user = User.last
-    expect(current_path).to eq("/users/#{user.id}")
+    expect(current_path).to eq("/users")
   end
 
   it 'flashes an error with invalid credentials' do
