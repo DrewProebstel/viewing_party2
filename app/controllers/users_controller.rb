@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = 'Account Successfully Created'
-      redirect_to "/users/#{@user.id}"
+      redirect_to "/users"
     else
       @user.errors.full_messages.each do |error|
       flash[:error] = error

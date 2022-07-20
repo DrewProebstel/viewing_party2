@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Landing Page" do
+  before :each do
+    @user = User.create(name: 'Drewb', email: 'Drew@testemail.com', password: "test", password_confirmation: "test", password: "test", password_confirmation: "test")
+    visit "/login"
+
+    fill_in "email", with: 'Drew@testemail.com'
+    fill_in "password", with: 'test'
+    click_button "Log In"
+  end
   it 'displays title of application' do
     visit '/'
     expect(page).to have_content("Viewing Party")
@@ -26,10 +34,9 @@ RSpec.describe "Landing Page" do
   end
 
   it 'links to users dashboard' do
-    drew = User.create(name: "Drew Proebstel", email: "drew@turdmail.com", password: "test", password_confirmation: "test")
     visit '/'
-    click_link("Drew Proebstel")
-    expect(current_path).to eq("/users/#{drew.id}")
+    click_link("Drewb")
+    expect(current_path).to eq("/users")
   end
 
   it 'links to landing page' do
