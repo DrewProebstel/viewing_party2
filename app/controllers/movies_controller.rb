@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :find_user
+  before_action :current_user
 
   def index
     @movies = MovieFacade.movie_results(params[:search])

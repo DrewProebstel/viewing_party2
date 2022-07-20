@@ -2,11 +2,16 @@ require 'rails_helper'
 
 RSpec.describe 'Movies Index/Results Page' do
   before :each do
-    @user = User.create!(name: 'Drewb', email: 'Drew@testemail.com', password: "test", password_confirmation: "test")
+    @user = User.create(name: 'Drewb', email: 'Drew@testemail.com', password: "test", password_confirmation: "test", password: "test", password_confirmation: "test")
+    visit "/login"
+
+    fill_in "email", with: 'Drew@testemail.com'
+    fill_in "password", with: 'test'
+    click_button "Log In"
   end
 
   it "displays the top rated movies", :vcr do
-    visit "users/#{@user.id}/discover"
+    visit "users/discover"
     click_button("Discover Top Rated Movies")
     expect(page).to have_link("The Shawshank Redemption")
     expect(page).to have_content("Vote Average: 8.7")
@@ -15,7 +20,7 @@ RSpec.describe 'Movies Index/Results Page' do
   end
 
   it "displays movies related to a prior search", :vcr do
-    visit "users/#{@user.id}/discover"
+    visit "users/discover"
     fill_in "search", with: "Shaw"
     click_button("Search")
 
@@ -25,10 +30,10 @@ RSpec.describe 'Movies Index/Results Page' do
   end
 
   it "links to a movie's details, show page", :vcr do
-    visit "users/#{@user.id}/discover"
+    visit "users/discover"
     click_button("Discover Top Rated Movies")
 
     click_link("The Shawshank Redemption")
-    expect(current_path).to eq("/users/#{@user.id}/movies/278")
+    expect(current_path).to eq("/users/movies/278")
   end
 end
