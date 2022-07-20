@@ -17,7 +17,7 @@ RSpec.describe 'Discover Index Page' do
 
         click_button("Discover Top Rated Movies")
 
-        expect(current_path).to eq("/users/#{@user.id}/movies")
+        expect(current_path).to eq("/users/movies")
       end
 
       it "has a search field to find movies by title", :vcr do
@@ -26,7 +26,7 @@ RSpec.describe 'Discover Index Page' do
         fill_in "search", with: "Shaw"
         click_button("Search")
 
-        expect(current_path).to eq("/users/#{@user.id}/movies")
+        expect(current_path).to eq("/users/movies")
       end
   end
 end
