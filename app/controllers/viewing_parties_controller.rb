@@ -1,5 +1,5 @@
 class ViewingPartiesController < ApplicationController
-  before_action :find_user
+  before_action :current_user
 
   def new
     @movie = MovieFacade.create_single_movie(params[:movie_id])
@@ -13,7 +13,7 @@ class ViewingPartiesController < ApplicationController
     invitees_id.each do |invitee_id|
       PartyUser.create!(user_id: invitee_id, party_id: @party.id)
     end
-    PartyUser.create!(user_id: params[:id], party_id: @party.id)
+    PartyUser.create!(user_id: @user.id, party_id: @party.id)
     redirect_to "/users"
   end
 
@@ -22,7 +22,7 @@ class ViewingPartiesController < ApplicationController
   def viewing_party_params
     {
       start_time: params[:start_time],
-      host: params[:id],
+      host: @user.id,
       duration: params[:duration],
       movie_id: params[:movie_id],
       host_name: @user.name

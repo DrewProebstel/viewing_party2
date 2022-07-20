@@ -69,6 +69,6 @@ RSpec.describe "Dashboard Page" do
     visit "/users"
     click_link("The Lord of the Rings")
 
-    expect(current_path).to eq("/users/#{@user.id}/movies/123")
+    expect(current_path).to eq("/users/movies/123")
   end
 end

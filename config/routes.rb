@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post '/login', to: 'users#login_user'
 
   get '/users/movies', to: 'movies#index'
-  get '/users/:id/movies/:movie_id/viewing-party/new', to: 'viewing_parties#new'
-  get '/users/:id/movies/:movie_id', to: 'movies#show'
-  post '/users/:id/movies/:movie_id', to: 'viewing_parties#create'
+  get '/users/movies/:movie_id/viewing-party/new', to: 'viewing_parties#new'
+  get '/users/movies/:movie_id', to: 'movies#show'
+  post '/users/movies/:movie_id', to: 'viewing_parties#create'
 end
